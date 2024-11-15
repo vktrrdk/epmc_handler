@@ -7,7 +7,7 @@ tools = [
     {
         'name': 'myFirstTool', #example for delly
         'query': 'DELLY AND variants'
-    },
+    },      
 ]
 
 def fetch_and_save_data(tool_name, query_input, file_name):
@@ -66,10 +66,23 @@ def show_tool_information(tool_name):
         # For example, you might read the file and output some data, modify it, etc.
         with open(file_name, 'r') as file:
             data = json.load(file)
-            # Implement any processing or viewing code here
-            print(f"{len(data['resultList']['result'])} entries") # Example of printing the content
+            data_results = data['resultList']['result']
+            output = {}
+            output['entries'] = len(data_results)
+            output['doi'] = get_dois(data_results)
+            
+            # Implement any processing  or viewing code here
+            print(output)
     else:
         print(f"File {file_name} does not exist.")
+
+
+def get_dois(results):
+    dois = []
+    for res in results:
+        if "doi" in res:
+            dois.append(res['doi'])
+    return dois
 
 
 def get_tool_information():
