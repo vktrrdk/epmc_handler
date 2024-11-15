@@ -61,9 +61,7 @@ def show_tool_information(tool_name):
     file_name = f"{tool_name}.json"
     
     if os.path.exists(file_name):
-        print(f"File {file_name} exists. Proceeding with operations...")
-        # Dummy code: Here you can define operations you want to perform on the file
-        # For example, you might read the file and output some data, modify it, etc.
+    
         with open(file_name, 'r') as file:
             data = json.load(file)
             data_results = data['resultList']['result']
@@ -71,8 +69,9 @@ def show_tool_information(tool_name):
             output['entries'] = len(data_results)
             output['doi'] = get_dois(data_results)
             
-            # Implement any processing  or viewing code here
             print(output)
+            #with open('test.json', 'w') as write_file:
+            #    json.dump(output, write_file)
     else:
         print(f"File {file_name} does not exist.")
 
